@@ -5,6 +5,7 @@ namespace Arc
     public sealed class ObjectValue : IValue
     {
         // TODO: comparer
+        // TODO: don't expose dict
         public SortedDictionary<IValue, IValue> Members { get; private set; }
 
         public BoolValue ToBoolValue()

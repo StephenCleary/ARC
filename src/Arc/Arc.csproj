@@ -45,6 +45,7 @@
     <Compile Include="NullValue.cs" />
     <Compile Include="NumberValue.cs" />
     <Compile Include="ObjectValue.cs" />
+    <Compile Include="Operations.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="StringValue.cs" />
   </ItemGroup>

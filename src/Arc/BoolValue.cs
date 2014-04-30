@@ -16,6 +16,11 @@ namespace Arc
             Value = value;
         }
 
+        public static BoolValue Create(bool value)
+        {
+            return value ? TrueInstance : FalseInstance;
+        }
+
         public static BoolValue False { get { return FalseInstance; } }
         public static BoolValue True { get { return TrueInstance; } }
 
