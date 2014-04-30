@@ -21,3 +21,10 @@ TODO: Determine host context, required "standard library" objects, etc.
 - Strongly order all object values?
   null < function (ordered by function text as a string) < number (numeric ordering) < string (UTF16 code point ordering) < object (can define own ordering; default is based on keys/values)
 - null propagating operator on by default?
+
+Rules actually in the language: ;)
+- Implicit conversions never throw and always use the invariant culture.
+
+Stdlib:
+- Culture-based formatting/parsing.
+- Hex, currency, and other special formatting/parsing.

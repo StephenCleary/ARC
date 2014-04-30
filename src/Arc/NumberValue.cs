@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -36,8 +37,7 @@ namespace Arc
 
         public StringValue ImplicitConversionToStringValue()
         {
-            // TODO: precision, culture
-            return StringValue.Create(Value.ToString());
+            return StringValue.Create(Value.ToString("G16", CultureInfo.InvariantCulture));
         }
     }
 }

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Globalization;
 
 namespace Arc
 {
@@ -29,10 +30,9 @@ namespace Arc
 
         public NumberValue ImplicitConversionToNumberValue()
         {
-            // TODO: Allow hex, etc? Probably not; have stdlib support for that.
             decimal result;
-            if (!decimal.TryParse(Value, out result))
-                throw new InvalidCastException("Failed to convert string to number: " + Value);
+            if (!decimal.TryParse(Value, NumberStyles.Float, CultureInfo.InvariantCulture, out result))
+                return NumberValue.Zero;
             return NumberValue.Create(result);
         }
 
