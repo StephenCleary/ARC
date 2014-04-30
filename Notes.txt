@@ -2,29 +2,38 @@ Simple dynamic language with prototypal inheritance.
 - "base" is just a convention, not a keyword.
 TODO: Determine host context, required "standard library" objects, etc.
 - Is there some way of isolating extensions?
-- Types:
-  - Null. Only one value; actually a unit type.
-  - Object. Associative array.
-  - String. UTF16. Immutable?
-  - Number. Decimal/decimal64. Immutable?
-  - Function. Immutable?
-- Stdlib types: Array, Regex, Math?
+  - A "using" scope pushing onto a stack of built-in objects? Or *all* objects in scope???
 - Operators:
   - defined(expr) - returns true if expression is defined.
   - typeof(expr) - do we need this?
-  - Numeric: +, -, *, /, %, +=, -=, *=, /=, %=
-    - Integer division? Or should all rounding be explicit?
-  - String: &
-    - Do we need anything else?
 - Functions: lexically-scoped closures.
-- Are strings and functions objects? What about Number or Null?
 - Strongly order all object values?
-  null < function (ordered by function text as a string) < number (numeric ordering) < string (UTF16 code point ordering) < object (can define own ordering; default is based on keys/values)
-- null propagating operator on by default?
+  null < function (unspecified but reliable in a single run) < number (numeric ordering) < string (UTF16 code point ordering) < object (can define own ordering; default is reference equality: unspecified but reliable in a single run)
+- null propagating operator on by default for member access?
+- _ is a special variable name that can only be declared, never used.
+- Proper string literals a la Raymond Chen.
+- Override object comparison with a spaceship operator? Or equivalent function call.
 
 Rules actually in the language: ;)
 - Implicit conversions never throw and always use the invariant culture.
+  - Numeric operators (unary +,unary -,unary ++,unary --,+,-,*,/,%,+=,-=,*=,/=,%=) implicitly convert to Number.
+  - Bitwise operators (unary ~,@&,@|,@^) implicitly convert to Number and then round to an unsigned 64-bit integer value.
+  - Logical operators (unary !,&&,||) implicitly convert to Bool.
+  - String operators (&) implicitly convert to String.
+  - Comparison operator (==,!=,>,<,<=,>=) do not convert.
+- No support for postincrement/postdecrement.
+- Bitwise operations internally round to a 64-bit unsigned number (or 0 if the source value is out of range).
+- Types:
+  - Null. Only one value.
+  - Bool. Only two values.
+  - Function. Immutable.
+  - Number. An immutable, signed decimal floating-point value with at least 16 digits of precision and a scientific notation exponent range of at least [-15,15].
+  - String. UTF16, immutable.
+  - Object. Associative array.
 
 Stdlib:
 - Culture-based formatting/parsing.
 - Hex, currency, and other special formatting/parsing.
+- Signed/unsigned shift functions.
+- Integer division.
+- Array and Regex.

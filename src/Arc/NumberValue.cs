@@ -9,7 +9,7 @@ namespace Arc
 {
     public sealed class NumberValue : IValue
     {
-        private static readonly NumberValue ZeroInstance = new NumberValue(0M);
+        private static readonly NumberValue ZeroInstance = new NumberValue(decimal.Zero);
 
         private NumberValue(decimal value)
         {
@@ -24,6 +24,21 @@ namespace Arc
         public static NumberValue Zero { get { return ZeroInstance; } }
 
         public decimal Value { get; private set; }
+
+        public ulong BitwiseValue
+        {
+            get
+            {
+                try
+                {
+                    return Convert.ToUInt64(Value);
+                }
+                catch (OverflowException)
+                {
+                    return 0;
+                }
+            }
+        }
 
         public BoolValue ImplicitConversionToBoolValue()
         {
