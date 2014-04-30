@@ -10,17 +10,17 @@
 
         public static NullValue Value { get { return Instance; } }
 
-        public BoolValue ToBoolValue()
+        public BoolValue ImplicitConversionToBoolValue()
         {
             return BoolValue.False;
         }
 
-        public NumberValue ToNumberValue()
+        public NumberValue ImplicitConversionToNumberValue()
         {
             return NumberValue.Zero;
         }
 
-        public StringValue ToStringValue()
+        public StringValue ImplicitConversionToStringValue()
         {
             return StringValue.Empty;
         }

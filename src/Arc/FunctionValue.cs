@@ -15,17 +15,17 @@ namespace Arc
 
         public string Text { get; private set; }
 
-        public BoolValue ToBoolValue()
+        public BoolValue ImplicitConversionToBoolValue()
         {
             return BoolValue.True;
         }
 
-        public NumberValue ToNumberValue()
+        public NumberValue ImplicitConversionToNumberValue()
         {
             return NumberValue.Zero;
         }
 
-        public StringValue ToStringValue()
+        public StringValue ImplicitConversionToStringValue()
         {
             return StringValue.Empty;
         }

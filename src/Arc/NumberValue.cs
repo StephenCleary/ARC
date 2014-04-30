@@ -24,17 +24,17 @@ namespace Arc
 
         public decimal Value { get; private set; }
 
-        public BoolValue ToBoolValue()
+        public BoolValue ImplicitConversionToBoolValue()
         {
             return Value == 0 ? BoolValue.False : BoolValue.True;
         }
 
-        public NumberValue ToNumberValue()
+        public NumberValue ImplicitConversionToNumberValue()
         {
             return this;
         }
 
-        public StringValue ToStringValue()
+        public StringValue ImplicitConversionToStringValue()
         {
             // TODO: precision, culture
             return StringValue.Create(Value.ToString());

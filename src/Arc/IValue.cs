@@ -8,11 +8,11 @@ namespace Arc
 {
     public interface IValue
     {
-        BoolValue ToBoolValue();
+        BoolValue ImplicitConversionToBoolValue();
 
-        NumberValue ToNumberValue();
+        NumberValue ImplicitConversionToNumberValue();
 
-        StringValue ToStringValue();
+        StringValue ImplicitConversionToStringValue();
 
         // TODO: ToStringRepresentation()?
     }

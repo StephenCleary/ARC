@@ -22,12 +22,12 @@ namespace Arc
 
         public string Value { get; private set; }
 
-        public BoolValue ToBoolValue()
+        public BoolValue ImplicitConversionToBoolValue()
         {
             return this == EmptyInstance ? BoolValue.False : BoolValue.True;
         }
 
-        public NumberValue ToNumberValue()
+        public NumberValue ImplicitConversionToNumberValue()
         {
             // TODO: Allow hex, etc? Probably not; have stdlib support for that.
             decimal result;
@@ -36,7 +36,7 @@ namespace Arc
             return NumberValue.Create(result);
         }
 
-        public StringValue ToStringValue()
+        public StringValue ImplicitConversionToStringValue()
         {
             return this;
         }

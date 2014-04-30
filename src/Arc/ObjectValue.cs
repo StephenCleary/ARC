@@ -8,19 +8,19 @@ namespace Arc
         // TODO: don't expose dict
         public SortedDictionary<IValue, IValue> Members { get; private set; }
 
-        public BoolValue ToBoolValue()
+        public BoolValue ImplicitConversionToBoolValue()
         {
             // TODO: permit overload.
             return BoolValue.True;
         }
 
-        public NumberValue ToNumberValue()
+        public NumberValue ImplicitConversionToNumberValue()
         {
             // TODO: permit overload.
             return NumberValue.Zero;
         }
 
-        public StringValue ToStringValue()
+        public StringValue ImplicitConversionToStringValue()
         {
             // TODO: permit overload.
             return StringValue.Empty;

@@ -26,17 +26,17 @@ namespace Arc
 
         public bool Value { get; private set; }
 
-        public BoolValue ToBoolValue()
+        public BoolValue ImplicitConversionToBoolValue()
         {
             return this;
         }
 
-        public NumberValue ToNumberValue()
+        public NumberValue ImplicitConversionToNumberValue()
         {
             return NumberValue.Create(Value ? 1M : 0M);
         }
 
-        public StringValue ToStringValue()
+        public StringValue ImplicitConversionToStringValue()
         {
             return StringValue.Create(Value ? "true" : "false");
         }
