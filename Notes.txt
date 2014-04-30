@@ -1,0 +1,22 @@
+Simple dynamic language with prototypal inheritance.
+- "base" is just a convention, not a keyword.
+TODO: Determine host context, required "standard library" objects, etc.
+- Is there some way of isolating extensions?
+- Types:
+  - Null. Only one value; actually a unit type.
+  - Object. Associative array.
+  - String. UTF16. Immutable?
+  - Number. Decimal/decimal64. Immutable?
+  - Function. Immutable?
+- Stdlib types: Array, Regex, Math?
+- Operators:
+  - defined(expr) - returns true if expression is defined.
+  - typeof(expr) - do we need this?
+  - Numeric: +, -, *, /, %, +=, -=, *=, /=, %=
+    - Integer division? Or should all rounding be explicit?
+  - String: &
+    - Do we need anything else?
+- Functions: lexically-scoped closures.
+- Are strings and functions objects? What about Number or Null?
+- Strongly order all object values?
+  null < function (ordered by function text as a string) < number (numeric ordering) < string (UTF16 code point ordering) < object (can define own ordering; default is based on keys/values)
