@@ -13,6 +13,7 @@ TODO: Determine host context, required "standard library" objects, etc.
 - _ is a special variable name that can only be declared, never used.
 - Proper string literals a la Raymond Chen.
 - Override object comparison with a spaceship operator? Or equivalent function call.
+- Should all object keys be strings?
 
 Rules actually in the language: ;)
 - Implicit conversions never throw and always use the invariant culture.

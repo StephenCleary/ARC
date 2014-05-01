@@ -1,0 +1,19 @@
+EBNF with extensions:
+- Space implies concatenation.
+- "expr*" means zero or more; equivalent to "{expr}"
+- "expr+" means one or more; equivalent to "expr,{expr}"
+- No ; terminator.
+
+ws = TODO
+digit = "0" | "1" | "2" | "3" | "4" | "5" | "6" | "7" | "8" | "9"
+sign = "+" | "-"
+
+LiteralNumber = [sign] digit+ ["." digit+] ["e" [sign] digit+]
+LiteralNull = "null"
+LiteralBool = "true" | "false"
+LiteralString = """ [stringchar | """" ]+ """
+LiteralObject = "{" ws* [object-member ws* ("," ws* object-member ws*)* [","]] ws* "}"
+LiteralArray = "[" ws* [array-member ws* ("," ws* array-member ws*)* [","]] ws* "]"
+// TODO: string escape characters? Create them using number->char, also eol as constant.
+//  JavaScript => String.fromCharCode(n); "string".charCodeAt(i);
+// Can also have an EscapeLiteralString like var test = \\"\n";
