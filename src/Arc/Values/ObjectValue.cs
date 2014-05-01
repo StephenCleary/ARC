@@ -1,32 +1,28 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 
-namespace Arc
+namespace Arc.Values
 {
-    public sealed class FunctionValue : IValue
+    public sealed class ObjectValue : IValue
     {
-        public FunctionValue(string text)
-        {
-            Text = text;
-        }
-
-        public string Text { get; private set; }
+        // TODO: comparer
+        // TODO: don't expose dict
+        public SortedDictionary<IValue, IValue> Members { get; private set; }
 
         public BoolValue ImplicitConversionToBoolValue()
         {
+            // TODO: permit overload.
             return BoolValue.True;
         }
 
         public NumberValue ImplicitConversionToNumberValue()
         {
+            // TODO: permit overload.
             return NumberValue.Zero;
         }
 
         public StringValue ImplicitConversionToStringValue()
         {
+            // TODO: permit overload.
             return StringValue.Empty;
         }
     }

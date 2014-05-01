@@ -1,18 +1,17 @@
-﻿namespace Arc
+﻿namespace Arc.Values
 {
-    public sealed class NullValue : IValue
+    public sealed class FunctionValue : IValue
     {
-        private static readonly NullValue Instance = new NullValue();
-
-        private NullValue()
+        public FunctionValue(string text)
         {
+            Text = text;
         }
 
-        public static NullValue Value { get { return Instance; } }
+        public string Text { get; private set; }
 
         public BoolValue ImplicitConversionToBoolValue()
         {
-            return BoolValue.False;
+            return BoolValue.True;
         }
 
         public NumberValue ImplicitConversionToNumberValue()

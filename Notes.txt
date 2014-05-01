@@ -35,5 +35,5 @@ Stdlib:
 - Culture-based formatting/parsing.
 - Hex, currency, and other special formatting/parsing.
 - Signed/unsigned shift functions.
-- Integer division.
+- Math: integer division, pi, etc.
 - Array and Regex.

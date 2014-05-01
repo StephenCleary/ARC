@@ -1,7 +1,6 @@
-﻿using System;
-using System.Globalization;
+﻿using System.Globalization;
 
-namespace Arc
+namespace Arc.Values
 {
     public sealed class StringValue : IValue
     {
