@@ -73,3 +73,13 @@ stampit(methods, state, enclose);
 Delegate minimization:
 (args) => { } is ambiguous: a noop function (returning null) or a function that returns an empty object?
 Do try to keep the "x," instead of "x: x,"
+
+======
+
+For now:
+- Methods can optionally take a "member parameter", customarily named "this".
+- When a method is called with member access syntax (e.g., "x.method()"), then "this" is bound to that value "x".
+- When a method is called with member specification syntax (e.g., "method.(x)" or "y.method.(x)"), then "this" is bound to the specified value "x".
+- When a method is called bare (e.g., "method()"), then first method lookup is performed, and then "this" is bound to the containing object (i.e., the calling method's "this"; we may need an "implicit this" for binding here).
+- Otherwise, "this" is null.
+- Delegate to "base" by convention.
