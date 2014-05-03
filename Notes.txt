@@ -13,7 +13,15 @@ TODO: Determine host context, required "standard library" objects, etc.
 - _ is a special variable name that can only be declared, never used.
 - Proper string literals a la Raymond Chen.
 - Override object comparison with a spaceship operator? Or equivalent function call.
-- Should all object keys be strings?
+- Should all object keys be strings? Or strings and numbers?
+- "Constructor" is just a function that returns an object.
+  var Animal = (name) -> { return { Name: name }; };
+  var Horse = (name, mane) -> { return { base: Animal(name), Mane: mane }; };
+  - This isn't prototypal inheritance; is that OK?
+- Can we make functions just _callable objects_? Convention: invocations invoke the "call" member?
+  - Should a function have access to its own properties?
+- How best to support static methods/properties?
+- Enumeration, generators, observables, and promises.
 
 Rules actually in the language: ;)
 - Implicit conversions never throw and always use the invariant culture.

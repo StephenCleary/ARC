@@ -1,0 +1,75 @@
+Objects inherit from objects.
+To create a new "instance", need to create a new object.
+Can we do this in a clean way with factory/constructor methods?
+
+var Base = (width, height) =>
+{
+  width,
+  height,
+  area: (this.) => this.width * this.height,
+};
+
+var instance = Base(3, 5);
+// "instance" does not have a "base" member; it's not deriving from anything; it's an instance of Base.
+
+var Derived = (width, height) =>
+{
+  base = Base(width, height),
+  quack: () => say("I'm a duck")
+};
+
+var derivedInstance = Derived(3, 5);
+// "derivedInstance" does have a "base" member, an instance of Base.
+// This is what Crockford calls "parasitic inheritance"; it creates its own instances all the way up. No way to modify Base after the fact.
+
+Embracing Prototypal Inheritance:
+
+var rectangle =
+{
+  create: (this., width, height) =>
+  {
+    return
+    {
+      base = this,
+      width,
+      height,
+    };
+  },
+  area: (this.) =>
+  {
+    return this.width * this.height;
+  },
+};
+
+var rect = rectangle.create(3, 5); // rect == { base: rectangle, width: 3, height: 5 }
+var area = rect.area();
+
+var square = { base: rectangle };
+square.create = (this., side) => { return this.base.create.call(this, side, side); } // Overrides "this" for the base constructor.
+
+Can we provide sufficient stdlib support for:
+- Delegation (for simple methods and scalar default values)
+- Concatenation (for state and aggregate default values) - "extend" in jQuery or _ - ones that are passed in later override previous values.
+  extend(target, params concats[])
+- Mixins/Blueprints (for methods, optionally with private state)
+stampit(methods, state, enclose);
+- StampIt can .compose() with other stammps.
+-> Does the language need to support inheritance at all??? Yes; delegation requires it.
+-> Support multiple inheritance?
+-> Or a special "extend" method that deep-copies all state and also closure variables. Combines Concatenation with Blueprints.
+  - But what if closure variables are specifically referencing *global, shared* state???
+-> The core problem: in proto/mixin inheritance, you want local state but what happens if the proto/mixin gets new state?
+  - Can we do "shadow state" or something crazy?
+-> If we introduce the notion of "private" then Blueprints are no longer necessary.
+- Have ".(thisArg, other, args)" syntax instead of "call"?
+- JS allows you to add a property that does not participate in enumeration?
+- Polymorphism: In JS, "this" always refers to the most-derived object, so when you "base.X()", within X(), "this" does not refer to "base".
+  - If "x.init()" delegates to "y.init()", should "this" refer to x or y? Maybe have "this." and "self."? How would "self." be defined? The object containing the function reference.
+- Self used a "traits object" which consisted of methods and acted as the prototype for the actual object that is then cloned to create an instance.
+- Do "modules" provide a viable alternative to inheritance?
+- "var x = new y;" shorthand for Object.Create? or: "var x = { base: y };" and reserve "new" for cloning semantics.
+- Can we allow objects to override __getMember/__setMember? If so, they can support multiple inheritance.
+
+Delegate minimization:
+(args) => { } is ambiguous: a noop function (returning null) or a function that returns an empty object?
+Do try to keep the "x," instead of "x: x,"
