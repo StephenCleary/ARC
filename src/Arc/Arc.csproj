@@ -39,6 +39,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Grammar\Lexer.cs" />
+    <Compile Include="Grammar\IToken.cs" />
+    <Compile Include="Grammar\LiteralBoolToken.cs" />
+    <Compile Include="Grammar\AdditiveOperatorToken.cs" />
+    <Compile Include="Grammar\MultiplicativeOperatorToken.cs" />
+    <Compile Include="Grammar\StringTokenBase.cs" />
     <Compile Include="Values\BoolValue.cs" />
     <Compile Include="Values\FunctionValue.cs" />
     <Compile Include="Values\IValue.cs" />

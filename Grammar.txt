@@ -3,17 +3,33 @@ EBNF with extensions:
 - "expr*" means zero or more; equivalent to "{expr}"
 - "expr+" means one or more; equivalent to "expr,{expr}"
 - No ; terminator.
+- /re/ wraps a regular expression (for terminals)
 
 ws = TODO
 digit = "0" | "1" | "2" | "3" | "4" | "5" | "6" | "7" | "8" | "9"
 sign = "+" | "-"
 
-LiteralNumber = [sign] digit+ ["." digit+] ["e" [sign] digit+]
-LiteralNull = "null"
-LiteralBool = "true" | "false"
-LiteralString = """ [stringchar | """" ]+ """
-LiteralObject = "{" ws* [object-member ws* ("," ws* object-member ws*)* [","]] ws* "}"
-LiteralArray = "[" ws* [array-member ws* ("," ws* array-member ws*)* [","]] ws* "]"
+literal-number = [sign] digit+ ["." digit+] ["e" [sign] digit+]
+               = /[+-]?[0-9]+(\.[0-9]+)?(e[+-]?[0-9]+)?/
+literal-null = "null"
+literal-bool = "true" | "false"
+literal-doublequote-string = '"' [stringchar | '""']+ '"'
+literal-singlequote-string = "'" [stringchar | "''"]+ "'"
+literal-string = literal-doublequote-string | literal-singlequote-string (* TODO: literal-escaped-string *)
+literal-object = "{" ws* [object-member ws* ("," ws* object-member ws*)* [","]] ws* "}"
+literal-array = "[" ws* [array-member ws* ("," ws* array-member ws*)* [","]] ws* "]"
+literal = literal-number | literal-null | literal-bool | literal-string | literal-object | literal-array
+primary-expression = literal | "(" ws* expression ws* ")" (*TODO: | identifier *)
+postfix-expression = postfix-expression "[" ws* expression ws* "]"
+                     postfix-expression "(" ws* [argument ws* ("," ws* argument ws*)* [","]] ws* ")"
+                     postfix-expression "." identifier
+unary-expression = postfix-expression | "++" unary-expression | "--" unary-expression | unary-operator multiplicative-expression
+unary-operator = "+" | "-" | "~" | "!"
+multiplicative-expression = unary-expression | multiplicative-expression multiplicative-operator unary-expression
+multiplicative-operator = "*" | "/" | "%"
+additive-expression = multiplicative-expression | additive-expression additive-operator multiplicative-expression
+additive-operator = "+" | "-"
+
 // TODO: string escape characters? Create them using number->char, also eol as constant.
 //  JavaScript => String.fromCharCode(n); "string".charCodeAt(i);
 // Can also have an EscapeLiteralString like var test = \\"\n";
