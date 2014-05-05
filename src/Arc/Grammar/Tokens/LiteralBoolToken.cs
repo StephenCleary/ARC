@@ -1,11 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Arc.Values;
+﻿using Arc.Values;
 
-namespace Arc.Grammar
+namespace Arc.Grammar.Tokens
 {
     public sealed class LiteralToken : IToken
     {

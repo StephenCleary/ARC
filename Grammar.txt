@@ -9,8 +9,7 @@ ws = TODO
 digit = "0" | "1" | "2" | "3" | "4" | "5" | "6" | "7" | "8" | "9"
 sign = "+" | "-"
 
-literal-number = [sign] digit+ ["." digit+] ["e" [sign] digit+]
-               = /[+-]?[0-9]+(\.[0-9]+)?(e[+-]?[0-9]+)?/
+literal-number = digit+ ["." digit+] [("e" | "E") [sign] digit+]
 literal-null = "null"
 literal-bool = "true" | "false"
 literal-doublequote-string = '"' [stringchar | '""']+ '"'
@@ -33,3 +32,16 @@ additive-operator = "+" | "-"
 // TODO: string escape characters? Create them using number->char, also eol as constant.
 //  JavaScript => String.fromCharCode(n); "string".charCodeAt(i);
 // Can also have an EscapeLiteralString like var test = \\"\n";
+
+Operators: ( ) { } [ ] . ; || ~
++ ++ +=
+- -- -=
+! !=
+* *=
+/ /=
+% %=
+@& @| @^
+& &&
+= ==
+> >=
+< <=

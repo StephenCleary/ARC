@@ -3,10 +3,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Arc.Values;
 
-namespace Arc.Grammar
+namespace Arc.Grammar.Syntax
 {
-    public interface IToken
+    public interface INode
     {
+        IValue Evaluate();
     }
 }

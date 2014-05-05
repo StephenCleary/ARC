@@ -39,12 +39,19 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Grammar\Lexer.cs" />
-    <Compile Include="Grammar\IToken.cs" />
-    <Compile Include="Grammar\LiteralBoolToken.cs" />
-    <Compile Include="Grammar\AdditiveOperatorToken.cs" />
-    <Compile Include="Grammar\MultiplicativeOperatorToken.cs" />
-    <Compile Include="Grammar\StringTokenBase.cs" />
+    <Compile Include="Grammar\Syntax\BinaryOperator.cs" />
+    <Compile Include="Grammar\Tokens\ILookaheadTokenizer.cs" />
+    <Compile Include="Grammar\Tokens\Lexer.cs" />
+    <Compile Include="Grammar\Tokens\IToken.cs" />
+    <Compile Include="Grammar\Tokens\LiteralBoolToken.cs" />
+    <Compile Include="Grammar\ILookaheadEnumerator.cs" />
+    <Compile Include="Grammar\Tokens\OperatorToken.cs" />
+    <Compile Include="Grammar\Syntax\Parser.cs" />
+    <Compile Include="Grammar\Tokens\StringTokenBase.cs" />
+    <Compile Include="Grammar\Syntax\Constant.cs" />
+    <Compile Include="Grammar\Syntax\IBinaryNode.cs" />
+    <Compile Include="Grammar\Syntax\INode.cs" />
+    <Compile Include="Grammar\Syntax\IOperatorNode.cs" />
     <Compile Include="Values\BoolValue.cs" />
     <Compile Include="Values\FunctionValue.cs" />
     <Compile Include="Values\IValue.cs" />
@@ -55,6 +62,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Values\StringValue.cs" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
