@@ -5,6 +5,7 @@ namespace Arc.Grammar.Tokens
 {
     public interface ILookaheadTokenizer : IDisposable
     {
+        // TODO: Handle lines and columns.
         char Current { get; }
         int CurrentIndex { get; }
         ILookaheadTokenizer MarkTokenStartAndConsume();

@@ -33,7 +33,7 @@ additive-operator = "+" | "-"
 //  JavaScript => String.fromCharCode(n); "string".charCodeAt(i);
 // Can also have an EscapeLiteralString like var test = \\"\n";
 
-Operators: ( ) { } [ ] . ; || ~
+Operators: ( ) { } [ ] . ; || ~ :
 + ++ +=
 - -- -=
 ! !=
@@ -45,3 +45,6 @@ Operators: ( ) { } [ ] . ; || ~
 = ==
 > >=
 < <=
+? ??
+
+TODO: ?? operator
