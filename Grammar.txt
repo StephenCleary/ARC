@@ -3,9 +3,8 @@ EBNF with extensions:
 - "expr*" means zero or more; equivalent to "{expr}"
 - "expr+" means one or more; equivalent to "expr,{expr}"
 - No ; terminator.
-- /re/ wraps a regular expression (for terminals)
 
-ws = TODO
+ws = " " | "\r\n"
 digit = "0" | "1" | "2" | "3" | "4" | "5" | "6" | "7" | "8" | "9"
 sign = "+" | "-"
 
@@ -28,6 +27,11 @@ multiplicative-expression = unary-expression | multiplicative-expression multipl
 multiplicative-operator = "*" | "/" | "%"
 additive-expression = multiplicative-expression | additive-expression additive-operator multiplicative-expression
 additive-operator = "+" | "-"
+
+postfix-expression = primary-expression ["[" ws* expression ws* "]"]
+unary-expression = postfix-expression | (unary-operator postfix-expression)*
+multiplicative-expression = unary-expression (multiplicative-operator unary-expression)*
+additive-expression = multiplicative-expression (additive-operator multiplicative-expression)*
 
 // TODO: string escape characters? Create them using number->char, also eol as constant.
 //  JavaScript => String.fromCharCode(n); "string".charCodeAt(i);

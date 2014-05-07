@@ -8,8 +8,9 @@ namespace Arc.Grammar.Tokens
         // TODO: Handle lines and columns.
         char Current { get; }
         int CurrentIndex { get; }
-        ILookaheadTokenizer MarkTokenStartAndConsume();
+        ILookaheadTokenizer MarkTokenStart();
         string Token { get; }
+        string TokenDiscardingLast { get; }
         ILookaheadTokenizer Consume();
     }
 
@@ -46,10 +47,15 @@ namespace Arc.Grammar.Tokens
 
             public string Token
             {
-                get { return _source.Substring(_startIndex, CurrentIndex); }
+                get { return _source.Substring(_startIndex, CurrentIndex - _startIndex); }
             }
 
-            public ILookaheadTokenizer MarkTokenStartAndConsume()
+            public string TokenDiscardingLast
+            {
+                get { return _source.Substring(_startIndex, CurrentIndex - _startIndex - 1); }
+            }
+
+            public ILookaheadTokenizer MarkTokenStart()
             {
                 _startIndex = _currentIndex;
                 return this;

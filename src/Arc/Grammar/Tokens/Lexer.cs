@@ -28,7 +28,7 @@ namespace Arc.Grammar.Tokens
 
                     if (IsDigit(input.Current))
                     {
-                        input.MarkTokenStartAndConsume();
+                        input.MarkTokenStart().Consume();
 
                         // digit+
                         while (IsDigit(input.Current))
@@ -56,35 +56,35 @@ namespace Arc.Grammar.Tokens
                     }
                     else if (input.Current == '+')
                     {
-                        input.MarkTokenStartAndConsume();
+                        input.MarkTokenStart().Consume();
                         if (input.Current == '+' || input.Current == '=')
                             input.Consume();
                         yield return new SymbolToken(input.Token);
                     }
                     else if (input.Current == '-')
                     {
-                        input.MarkTokenStartAndConsume();
+                        input.MarkTokenStart().Consume();
                         if (input.Current == '-' || input.Current == '=')
                             input.Consume();
                         yield return new SymbolToken(input.Token);
                     }
                     else if (input.Current == '!' || input.Current == '*' || input.Current == '/' || input.Current == '%' || input.Current == '=' || input.Current == '>' || input.Current == '<')
                     {
-                        input.MarkTokenStartAndConsume();
+                        input.MarkTokenStart().Consume();
                         if (input.Current == '=')
                             input.Consume();
                         yield return new SymbolToken(input.Token);
                     }
                     else if (input.Current == '&')
                     {
-                        input.MarkTokenStartAndConsume();
+                        input.MarkTokenStart().Consume();
                         if (input.Current == '&')
                             input.Consume();
                         yield return new SymbolToken(input.Token);
                     }
                     else if (input.Current == '@')
                     {
-                        input.MarkTokenStartAndConsume();
+                        input.MarkTokenStart().Consume();
                         if (input.Current != '&' && input.Current != '|' && input.Current != '^')
                             throw new Exception("Invalid operator '@'"); // TODO: ParseException
                         input.Consume();
@@ -92,14 +92,14 @@ namespace Arc.Grammar.Tokens
                     }
                     else if (input.Current == '?')
                     {
-                        input.MarkTokenStartAndConsume();
+                        input.MarkTokenStart().Consume();
                         if (input.Current == '?')
                             input.Consume();
                         yield return new SymbolToken(input.Token);
                     }
                     else if (input.Current == '|')
                     {
-                        input.MarkTokenStartAndConsume();
+                        input.MarkTokenStart().Consume();
                         if (input.Current != '|')
                             throw new Exception("Invalid operator '|'"); // TODO: ParseException
                         input.Consume();
@@ -107,12 +107,56 @@ namespace Arc.Grammar.Tokens
                     }
                     else if (input.Current == '(' || input.Current == ')' || input.Current == '{' || input.Current == '}' || input.Current == '[' || input.Current == ']' || input.Current == '.' || input.Current == ';' || input.Current == '~' || input.Current == ':')
                     {
-                        input.MarkTokenStartAndConsume();
+                        input.MarkTokenStart().Consume();
                         yield return new SymbolToken(input.Token);
+                    }
+                    else if (input.Current == '"')
+                    {
+                        input.Consume().MarkTokenStart();
+                        while (true)
+                        {
+                            if (input.Current == End)
+                                throw new Exception("Unterminated string constant.");
+                            if (input.Current == '"')
+                            {
+                                input.Consume();
+                                if (input.Current == '"')
+                                    input.Consume();
+                                else
+                                    break;
+                            }
+                            else
+                            {
+                                input.Consume();
+                            }
+                        }
+                        yield return new LiteralToken(StringValue.Create(input.TokenDiscardingLast.Replace("\"\"", "\"")));
+                    }
+                    else if (input.Current == '\'')
+                    {
+                        input.Consume().MarkTokenStart();
+                        while (true)
+                        {
+                            if (input.Current == End)
+                                throw new Exception("Unterminated string constant.");
+                            if (input.Current == '\'')
+                            {
+                                input.Consume();
+                                if (input.Current == '\'')
+                                    input.Consume();
+                                else
+                                    break;
+                            }
+                            else
+                            {
+                                input.Consume();
+                            }
+                        }
+                        yield return new LiteralToken(StringValue.Create(input.TokenDiscardingLast.Replace("''", "'")));
                     }
                     else if (IsAlpha(input.Current) || input.Current == '_')
                     {
-                        input.MarkTokenStartAndConsume();
+                        input.MarkTokenStart().Consume();
                         while (IsAlpha(input.Current) || IsDigit(input.Current) || input.Current == '_')
                             input.Consume();
                         var token = input.Token;
