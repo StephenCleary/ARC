@@ -28,7 +28,8 @@ multiplicative-operator = "*" | "/" | "%"
 additive-expression = multiplicative-expression | additive-expression additive-operator multiplicative-expression
 additive-operator = "+" | "-"
 
-postfix-expression = primary-expression ["[" ws* expression ws* "]"]
+primary-expression = literal | identifier
+postfix-expression = primary-expression
 unary-expression = postfix-expression | (unary-operator postfix-expression)*
 multiplicative-expression = unary-expression (multiplicative-operator unary-expression)*
 additive-expression = multiplicative-expression (additive-operator multiplicative-expression)*
@@ -52,3 +53,4 @@ Operators: ( ) { } [ ] . ; || ~ :
 ? ??
 
 TODO: ?? operator
+TODO: // comments

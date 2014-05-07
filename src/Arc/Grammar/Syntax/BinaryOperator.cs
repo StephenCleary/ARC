@@ -3,7 +3,7 @@ using Arc.Values;
 
 namespace Arc.Grammar.Syntax
 {
-    public sealed class BinaryOperator : IOperatorNode, IBinaryNode
+    public sealed class BinaryOperator : IOperatorNode
     {
         private readonly INode _left;
         private readonly INode _right;

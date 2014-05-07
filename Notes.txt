@@ -22,6 +22,8 @@ TODO: Determine host context, required "standard library" objects, etc.
   - Should a function have access to its own properties?
 - How best to support static methods/properties?
 - Enumeration, generators, observables, and promises.
+- Math comparisons.
+- Ambiguous @&@|@^&&||
 
 Rules actually in the language: ;)
 - Implicit conversions never throw and always use the invariant culture.
