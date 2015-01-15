@@ -55,6 +55,11 @@ Stdlib:
 - Math: integer division, pi, etc.
 - Array and Regex.
 - Exception.
-- Enumerable, Future, and Observable
-  - Async enumerable/observable?
-  - Language support for functions producing/consuming Future (async/await), Enumerable (yield/foreach), Observable (Subject/Rx), AsyncEnumerable (async + yield, await), AsyncObservable (is this really necessary?)
+- Enumerable, Future, Observable, AsyncEnumerable
+  - Language support for functions producing/consuming Future (async/await), Enumerable (yield/foreach), Observable (observable/next?), AsyncEnumerable (async + yield, await foreach).
+  - Erik Meijer thinks AsyncObservable would be necessary, but I don't see it (http://channel9.msdn.com/Events/Lang-NEXT/Lang-NEXT-2014/Keynote-Duality).
+  - Library support for LINQish functions for Enumerable, Observable, AsyncEnumerable.
+- Cancellation, Progress.
+- State (LogicalCallContext) - but this would require immutable types?
+- Thread pool (Task.Run), Parallel (would it be possible to do language support? parallel foreach - maybe also an easier way of consuming Observable/AsyncEnumerable? parallel await foreach).
+- Async-aware synchronization primitives.
