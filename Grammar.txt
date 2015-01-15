@@ -51,6 +51,38 @@ Operators: ( ) { } [ ] . ; || ~ :
 > >=
 < <=
 ? ??
+^^
 
-TODO: ?? operator
+TODO: ?? operator, ?. operator
 TODO: // comments
+
+Permitting single-line multi-statement lambdas:
+  () -> { object expression }
+  () => { function body }
+or:
+  () -> { object expression }
+  () -> < function body >
+or:
+  () -> {{ object expression }}
+  () -> { function body }
+or:
+  () -> { object expression }
+  () -> {{ function body }}
+or:
+  () -> { object expression }
+  () -> :{ function body }
+or:
+  () -> { object expression }
+  () -> ( multiple statements )
+
+if <expr> then <expr> [ else <expr> ]
+if:
+  <block>
+then:
+  <block>
+else:
+  <block>
+Can we make any <expr> into a <block> via ":"?
+- Makes object-expressions a bit less intuitive - have to use '=' instead of ':' or something.
+- Additional rule that a <block> may optionally have delimiting braces? I don't really like optional braces for expression blocks, but it would be nice to have a multi-statement lambda.
+Better approach: blocks are always whitespace-defined, but multiple statements can be wrapped in parenthesis.

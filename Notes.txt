@@ -24,12 +24,13 @@ TODO: Determine host context, required "standard library" objects, etc.
 - Enumeration, generators, observables, and promises.
 - Math comparisons.
 - Ambiguous @&@|@^&&||
+- Consider banker's rounding.
 
 Rules actually in the language: ;)
 - Implicit conversions never throw and always use the invariant culture.
   - Numeric operators (unary +,unary -,unary ++,unary --,+,-,*,/,%,+=,-=,*=,/=,%=) implicitly convert to Number.
   - Bitwise operators (unary ~,@&,@|,@^) implicitly convert to Number and then round to an unsigned 64-bit integer value.
-  - Logical operators (unary !,&&,||) implicitly convert to Bool.
+  - Logical operators (unary !,&&,||,^^) implicitly convert to Bool.
   - String operators (&) implicitly convert to String.
   - Comparison operator (==,!=,>,<,<=,>=) do not convert.
 - No support for postincrement/postdecrement.
@@ -39,8 +40,13 @@ Rules actually in the language: ;)
   - Bool. Only two values.
   - Function. Immutable.
   - Number. An immutable, signed decimal floating-point value with at least 16 digits of precision and a scientific notation exponent range of at least [-15,15].
+    - Min: 0.000000000000001
+    - Max: 9,999,999,999,999,999,000,000,000,000,000
+    - Values as low as 0.000000000000001 and as high as 9,999,999,999,999,999 are represented exactly.
+    - long.MaxValue = 9,223,372,036,854,775,807
   - String. UTF16, immutable.
-  - Object. Associative array.
+  - Object. Associative array. Immutable?
+  - List/Array. Linear array. Immutable?
 
 Stdlib:
 - Culture-based formatting/parsing.
@@ -48,3 +54,7 @@ Stdlib:
 - Signed/unsigned shift functions.
 - Math: integer division, pi, etc.
 - Array and Regex.
+- Exception.
+- Enumerable, Future, and Observable
+  - Async enumerable/observable?
+  - Language support for functions producing/consuming Future (async/await), Enumerable (yield/foreach), Observable (Subject/Rx), AsyncEnumerable (async + yield, await), AsyncObservable (is this really necessary?)
