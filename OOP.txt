@@ -1,0 +1,32 @@
+Convention-based prototypal inheritance.
+- Not everything is an object. Only objects are objects.
+- "Base" property on an object is its base type.
+  - Or we can restrict access via stdlib: Object.GetBase / TryGetBase / Object.SetBase
+  - No "object" base type.
+- Simple search performed by dot operator: walk the inheritance hierarchy looking for a matching symbol.
+- Can objects be directly invokable, and can they participate in implicit conversions?
+  - I'm thinking no to both. Force conversions and whatnot to be explicit.
+- Can objects be iterable? Or should we force "Items", e.g., "foreach (var item in list.Items)"
+  - foreach could check for Enumerable first and, failing that, use "Items" by convention.
+- Destruction:
+  - using statement should call Dispose for each member of the inheritance chain?
+    - Simplifies Dispose implementation (doesn't have to check for or call Base).
+  - is it possible to replace Dispose completely with a refcount?
+    - By default, decrement when scope is destroyed; can set local var to null to force.
+    - refcounts require weakptrs to break cycles; we should use our own scope-based "reachable" implementation instead.
+- Construction?
+  - Should always be done via factory methods. Named "Create"/"CreateAsync" by convention.
+  - No "new" keyword.
+  - Stdlib support should include the various types of prototypal inhertiance; see StampIt.
+- Static methods vs instance methods:
+  - Type definition is an object: "var Regex = { Match: (this, string) => ... };"
+    - Will this work as well as I think it will?
+  - Any method can take a "this" parameter, which is set to the invoking object when used in a dot-expression; otherwise is set to the first parameter.
+    "var regex = Regex.Create()"
+    "regex.Match(string)" equivalent to "Regex.Match(regex, string)"
+  - "this" is not a keyword.
+- Private members? Protected members? Not a big fan of protected, but private makes sense.
+  - Difficult to do in a functional language; we can use a stdlib-based approach a la StampIt.
+- What's the behavior when the dot operator doesn't find a value? Return null or throw?
+  - Probably throw. Provide exhaustive stdlib support for walking member definitions, incl "Object.TryGetMember" convenience wrapper.
+  - This also allows members with null values.

@@ -1,0 +1,17 @@
+Enumerator Select:
+  Enumerator.Map = iterator (this, func) ->
+    foreach (item in this.Items)
+      yield func(item)
+AsyncEnumerator Select:
+  AsyncEnumerator.Map = async iterator (this, func) ->
+    await foreach (item in this.Items)
+      yield func(item) // What about async funcs? Can we just define "await" to (synchronously) return a value directly if it's not a Future?
+Observable Select?:
+  Observable.Map = observable (this, func) ->
+    func.OnNext((data) -> this.OnNext(func(data)))
+    func.OnComplete(() -> this.OnComplete())
+    func.OnError((error) -> this.OnError(error))
+Observable actually has several parts:
+  subscribe { }
+  unsubscribe { }
+  // For each source sequence, next { }, complete { }, error { }
